@@ -1,0 +1,28 @@
+#define echoPin 2	// Connect Echo of sensor to 2 in Arduino
+#define trigPin 3	// Connect Trigger  of sensor to 3 in Arduino
+// Define variables
+int distance;
+long duration;
+
+void setup() {
+  pinMode(trigPin, OUTPUT);		// Sets the trigPin as an OUTPUT
+  pinMode(echoPin, INPUT);		// Sets the echoPin as an INPUT
+  Serial.begin(9600);}			// Serial communication is started
+
+void loop() {
+// Clears trigPin
+  digitalWrite(trigPin,HIGH);		
+  delayMicroseconds(2);
+// Sets trigPin HIGH for 10 µs
+  digitalWrite(trigPin,HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin,LOW);
+// Reads the echoPin, returns the sound wave travel time
+  duration = pulseIn(echoPin, HIGH);
+// Calculating distance
+  distance = (duration*0.034)/2;
+// Display distance in Serial Monitor
+  Serial.print("Distance is: ");
+  Serial.println(distance);
+  Serial.print(“ cm”);
+}
